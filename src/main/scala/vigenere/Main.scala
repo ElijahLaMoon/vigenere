@@ -12,6 +12,7 @@ object Main extends App {
   val key = StdIn.readLine().trim.toUpperCase
 
   println(s"Encrypted message: ${Helpers.encryptMessage(Helpers.elongateKey(key, plaintext.length), plaintext)}")
+  println(s"Decrypted message: ${Helpers.decryptMessage(Helpers.elongateKey(key, plaintext.length), plaintext)}")
 }
 
 private object Helpers {
@@ -50,5 +51,20 @@ private object Helpers {
     }
 
     cipherHelper()
+  }
+
+  def decryptMessage(key: String, message: String): String = {
+
+    @tailrec
+    def decipherHelper(index: Int = 0, plaintext: String = ""): String = {
+
+      if (index == message.length) plaintext
+      else {
+        val decryptedChar = indexedAlphabet(((message.charAt(index) - key.charAt(index)) + 26) % 26)
+        decipherHelper(index + 1, plaintext.appended(decryptedChar))
+      }
+    }
+
+    decipherHelper()
   }
 }
