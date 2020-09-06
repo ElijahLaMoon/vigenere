@@ -4,7 +4,6 @@ import scala.annotation.tailrec
 import scala.io.StdIn
 
 object Main extends App {
-
   print("Enter your message: ")
   val plaintext = StdIn.readLine().trim.toUpperCase
 
@@ -20,7 +19,6 @@ private object Helpers {
   private val indexedAlphabet = (0 to 25).zip('A' to 'Z').toMap
 
   def elongateKey(key: String, messageLength: Int): String = {
-
     if (key.length >= messageLength) key
     else {
       val charactersToAppendCount = messageLength - key.length
@@ -42,7 +40,6 @@ private object Helpers {
 
     @tailrec
     def cipherHelper(index: Int = 0, ciphertext: String = ""): String = {
-
       if (index == message.length) ciphertext
       else {
         val encryptedChar = indexedAlphabet((message.charAt(index) + key.charAt(index)) % 26)
@@ -54,10 +51,8 @@ private object Helpers {
   }
 
   def decryptMessage(key: String, message: String): String = {
-
     @tailrec
     def decipherHelper(index: Int = 0, plaintext: String = ""): String = {
-
       if (index == message.length) plaintext
       else {
         val decryptedChar = indexedAlphabet(((message.charAt(index) - key.charAt(index)) + 26) % 26)
