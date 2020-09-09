@@ -7,8 +7,8 @@ object Main extends App {
   val plaintext = StdIn.readLine().trim.toUpperCase
 
   print("Enter your key: ")
-  val key = StdIn.readLine().trim.toUpperCase
+  val key = Helpers.elongateKey(StdIn.readLine().trim.toUpperCase, plaintext.length)
 
-  println(s"Encrypted message: ${Helpers.encryptMessage(Helpers.elongateKey(key, plaintext.length), plaintext)}")
-  println(s"Decrypted message: ${Helpers.decryptMessage(Helpers.elongateKey(key, plaintext.length), plaintext)}")
+  println(s"Encrypted message: ${Helpers.encryptMessage(key, plaintext)}")
+  println(s"Decrypted message: ${Helpers.decryptMessage(key, plaintext)}")
 }
